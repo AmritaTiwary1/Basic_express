@@ -1,5 +1,5 @@
 const { name } = require('ejs');
-const express = require('express');
+const express = require('express');  //here,we use express package(import) by require('express'),weare assigning express to app. now app can use all fn/methods of express.
 const app = express();
 
 //MIDDLEWARE
