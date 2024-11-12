@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     age:Number
 })
 
-module.exports = mongoose.model("user",schema); //user is name of the collecton in db & it should be written inside inverted comma,here schema is userSchema
+module.exports = mongoose.model("user",userSchema); //user is name of the collecton in db & it should be written inside inverted comma,here schema is userSchema
  
 
 //Another way ---
