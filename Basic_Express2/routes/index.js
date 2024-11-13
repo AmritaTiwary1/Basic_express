@@ -13,7 +13,7 @@ router.get('/', function(req,res, next) {
 router.get('/create',async function(req,res){
 const createdUser = await userModel.create({  //create fn returns something, so to store it ,we used createduser
     username:"dev3",
-    age:25,
+    age:27,
     name:"dev"
   });
   res.send(createdUser); 
@@ -59,10 +59,12 @@ router.get('/oneuser',async function(req,res){
 
 //to find and delete document --
 router.get('/delete',async function(req,res){
-  let deleteduser = await userModel.findOneAndDelete({username:"devansh"});  //it delete one document at a time,if multiple documents are present with same username , we have to run delete operation multiple times
+  let deleteduser = await userModel.findOneAndDelete({username:"dev3"});  //it delete one document at a time,if multiple documents are present with same username , we have to run delete operation multiple times
   res.send(deleteduser);
 })
  
 
 
 module.exports = router;
+
+
