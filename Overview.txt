@@ -1,4 +1,0 @@
-Express
-Server
-Express Generator
-Mongodb
