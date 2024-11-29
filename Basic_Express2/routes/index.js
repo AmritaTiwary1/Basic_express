@@ -4,8 +4,15 @@ const userModel = require('./users');  //importing model from user.js where we h
 
 /* GET home page. */
 router.get('/', function(req,res, next) {
+  req.session.anyName = "Anything_eg.-saveYourUsername_Password"  //this is unique for each user , that means , if I write -- session = username, then each user's username will be store in server for his/her computer, and req.session can be accessed from any router, lets take an eg.-- if a user sign up in a website, then we can store that info in server(req.session.login=true), now when that user will again open website, we will fetch data for that particular system (whether login or not) in '/' route, and then according to that, we will show that page(if login - home/about/contact/service/logout  && if not login - home/login/signup)
   res.render('index');
   //res.send("hi")
+});
+
+//accessing Session from differnt route
+router.get('/checksession', function(req,res){
+     console.log(req.session);
+     res.send(req.session.anyName);
 });
 
 //TO CREATE DOCUMENT IN COLLECTION(userModel) OF DATABASE 
@@ -13,9 +20,9 @@ router.get('/', function(req,res, next) {
 router.get('/create',async function(req,res){
 const createdUser = await userModel.create({  //create fn returns something, so to store it ,we used createduser
     username:"dev3",
-    age:27,
+    age:27, 
     name:"dev"
-  });
+  }); 
   res.send(createdUser); 
 
 });
@@ -65,6 +72,6 @@ router.get('/delete',async function(req,res){
  
 
 
-module.exports = router;
+module.exports = router; 
 
 

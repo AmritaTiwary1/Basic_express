@@ -18,6 +18,8 @@ Now, we have express-session in our express js application. Below are programs o
 >>>      })
 >>>  );
 
+but, in our case, we using express generator,thats why we will import and use express-session in app.js
+
 Parameters------
 
 secret: It is a key that is used to sign a session ID cookie. It must be a strong and unique secret.
