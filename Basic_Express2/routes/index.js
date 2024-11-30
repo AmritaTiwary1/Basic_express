@@ -8,28 +8,32 @@ router.get('/', function(req,res, next) {
 });
 
 // *************    SESSION  **************
-/* router.get('/login',function(req,res){
-  //req.session.anyName = "Anything_eg.-saveYourUsername_Password"  //this is unique for each user , that means , if I write -- session = username, then each user's username will be store in server for his/her computer, and req.session can be accessed from any router, lets take an eg.-- if a user sign up in a website, then we can store that info in server(req.session.login=true), now when that user will again open website, we will fetch data for that particular system (whether login or not) in '/' route, and then according to that, we will show that page(if login - home/about/contact/service/logout  && if not login - home/login/signup)
-  res.render('login');
+router.get('/login',function(req,res){
+  req.session.anyName = "Anything_eg.-saveYourUsername_Password"  //this is unique for each user , that means , if I write -- session = username, then each user's username will be store in server for his/her computer, and req.session can be accessed from any router, lets take an eg.-- if a user sign up in a website, then we can store that info in server(req.session.login=true), now when that user will again open website, we will fetch data for that particular system (whether login or not) in '/' route, and then according to that, we will show that page(if login - home/about/contact/service/logout  && if not login - home/login/signup)
   req.session.login =true;
+  res.render('login');
+  
 })
 
 // ****** Accessing Session from differnt route ******
 
 router.get('/checksession', function(req,res){
-   //  console.log(req.session.anyName);
-   if(req.session.login === true){
-       res.render('home');  //we have not made home or login page yet, it is just a example
+    console.log(req.session.anyName);
+  console.log(req.session.login)
+    if(req.session.login === true){
+      // res.render('index');  
+    res.send("session is created");
     }
     else{
-      res.render('login');  //show login page to user
+      //res.render('login');  //show login page to user
+      res.send("session is deleted");
    }
 });
 
 // ***** deleting session --- when we restart the server (write npx nodemon/ or make changes in code), then session get deleted, and when we again go to login route, session.login will be made
  
 router.get('/logout',function(req,res){
- res.render('logout');
+ res.send('logout');
  req.session.destroy(function(err){
   if(err){
   throw err;
@@ -39,14 +43,14 @@ router.get('/logout',function(req,res){
 // *********************** COOKIE *****************
 
 router.get('/sendcookie', function(req,res){
- res.cookies("age",21);
- res.render("index");
+ res.cookie("age",21);
+ res.send("cookie is send with the name age");
 });
 
 router.get('/read', function(req,res){
 console.log(req.cookies) // --> age:21  here, we have written req bcoz we are reading cookies from browser to thr server
- console.log(req.cookies.age)  ---> 21
-res.send("COOKIES READ"); 
+ console.log(req.cookies.age) // ---> 21
+res.send("COOKIES READ IN TERMINAL"); 
 })
 
 //when we delete cookies, and want to access it,will get undefined
@@ -57,7 +61,7 @@ res.send("age cookie deleted");
 
 
 
-*/
+
 //TO CREATE DOCUMENT IN COLLECTION(userModel) OF DATABASE 
 
 // i comment it out bcoz if we restart our website on localhost , it will again create  router.get("/create", async function (req,res){  //since we know that js is asynchronous(no line by line execution ,if one line takes more time,next line will get executed) ,thatswhy we have to use await keyword to tell js to first complete create processs & then to run next line of code, but for that we have to use async keyword in the parent function (Rule)
