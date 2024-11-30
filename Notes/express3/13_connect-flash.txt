@@ -1,0 +1,35 @@
+******  WE CAN'T USE CONNECT-FLASH WITHOUT EXPRESS-SESSION  *************
+
+to flash some message eg. if someone enter wrong email,password , then a warning msg(flash) should be shown on screen , so there we use connect-flash package
+// frontend --- bootstrap,tailwind,etc   (<div classname="danger bg-red...etc">Wrong email password)</div>
+//backend -- connect-flash in backend to handle msg in frontend
+
+1. install connect-flash
+2. Before using connect-flash , we need to configure express-session -->
+app.set('view engine', 'ejs');
+app.use(session({
+  resave:false,
+  saveUninitialized:false,
+  secret: "radhey radhey"
+}))
+
+app.use(logger('dev')); 
+
+
+3. In app.use--- put connect-flash(we know app.use run before anything (before app.use(logger) and after app.use(express-session..etc))
+
+4. create flash in any route
+5. try to run it on another route
+
+in index.js--
+
+router.get('/login',function(req,res){
+ // req.flash("koi v naam string me","koi v data type wala value");
+ req.flash("age",21);
+  res.send("creating flash in this route");
+})
+
+router.get('/access', function(req,res){
+  console.log(req.flash("age"));
+  res.send("accessing flash value of login route in this route")
+})
