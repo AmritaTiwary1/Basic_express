@@ -27,7 +27,7 @@ module.exports = mongoose.model("user",userSchema); //user is name of the collec
 
 // module.exports = mongoose.model("Product", mongoose.Schema({
 //     productId:Number,
-//     productName:String,
+//     productName:String, 
 //     productPrice:Number
 // }))
 
