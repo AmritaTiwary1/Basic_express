@@ -1,0 +1,80 @@
+**********************  Sessions in Express JS ****************************
+
+A session is a way to persist user-specific data across multiple requests in web applications. In express provides the ‘express-session’ middleware to manage the session. The below command demonstrates the ‘How to install the express-session’ module in express using the npm.
+
+>>> npm install express express-session
+
+Now, we have express-session in our express js application. Below are programs on how we can use this express-session middleware in our express js application.
+
+>>>  const express = require("express");
+>>>  const session = require("express-session");
+>>>  const app = express();
+>>>  
+>>>  app.use(
+>>>      session({
+>>>          secret: "your-secret-key",   //secret: It is a key that is used to sign a session ID cookie. It must be a strong and unique secret.
+>>>          resave: false,  //resave: Forces the session to be saved back to the session store, even if the session wasn’t modified.
+>>>         saveUninitialized: false,   //saveUninitialized: Forces a session that is “uninitialized” to be saved to the store. A session is uninitialized when it is new but not modified.
+>>>      })
+>>>  );
+
+But, in our case, we using express generator,thats why we will import and use express-session in app.js
+
+ *************    SESSION  **************  (always in req bcoz browser send it to the server)
+
+ 1.create session -- req.session.session_Name 
+ 2.get session -- console.log(req.session.session_Name)
+ 3.delete session -- req.session.destroy()
+
+Here is the example -------------------
+
+ router.get('/login',function(req,res){
+  //req.session.anyName = "Anything_eg.-saveYourUsername_Password"  //this is unique for each user , that means , if I write -- session = username, then each user's username will be store in server for his/her computer, and req.session can be accessed from any router, lets take an eg.-- if a user sign up in a website, then we can store that info in server(req.session.login=true), now when that user will again open website, we will fetch data for that particular system (whether login or not) in '/' route, and then according to that, we will show that page(if login - home/about/contact/service/logout  && if not login - home/login/signup)
+  res.render('login');
+  req.session.login =true;
+})
+
+ ****** Accessing Session from differnt route ******
+
+router.get('/checksession', function(req,res){
+   //  console.log(req.session.anyName);
+   if(req.session.login === true){
+       res.render('home');  //we have not made home or login page yet, it is just a example
+    }
+    else{
+      res.render('login');  //show login page to user
+   }
+});
+
+ ***** deleting session --- when we restart the server (write npx nodemon/ or make changes in code), then session get deleted, and when we again go to login route, session.login will be made
+ 
+router.get('/logout',function(req,res){
+ res.render('logout');
+ req.session.destroy(function(err){
+  if(err){
+  throw err;
+ }}
+)});
+
+*********************************************************************************************************
+
+
+******************  Cookies in Express JS (res bcoz we send cookies to the browser but when we want to read, req.cookies)   *********************
+
+It is the small pieces of data that are stored in the client’s browser. Express has a middleware ‘cookie-parser’ that is issued to set cookies. The following command installs that middleware in your application.
+>>>npm install cookie-parser  .....etc
+
+In express-generator, cookie-parser is already installed in app.js
+
+1.cookie setup ---- res.cookie("koi v naam" , "uska value yha likhte h");
+
+2.cookies read ---
+  console.log(req.cookies) //all cookies will be displayed
+  console.log(req.cookie.age)  //the value of age cookie will be displayed
+
+3.cookie delete
+res.clearCookie("jo v us cookie ka naam hoga)
+
+
+
+
