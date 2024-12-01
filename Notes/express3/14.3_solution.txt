@@ -1,0 +1,89 @@
+All document in the userModel
+[
+    {
+        "_id": "674b123c7f7fff649cb8f96e",
+        "username": "dev",
+        "nickname": "ved",
+        "description": "i am happy from inside and outside",
+        "categories": [
+            "js",
+            "node",
+            "react",
+            "mongodb",
+            "express"
+        ],
+        "datecreated": "2024-11-30T13:25:00.452Z",
+        "__v": 0
+    },
+    {
+        "_id": "674b1368c81b843b6e9ca054",
+        "username": "deva",
+        "nickname": "aved",
+        "description": "i am happy",
+        "categories": [
+            "life",
+            "hapiness",
+            "yoga"
+        ],
+        "datecreated": "2024-11-30T13:30:02.068Z",
+        "__v": 0
+    },
+    {
+        "_id": "674b137f756b0ae55513a0b3",
+        "username": "radha",
+        "nickname": "radhe",
+        "description": "full of joy and happiness",
+        "categories": [
+            "real joy",
+            "content"
+        ],
+        "datecreated": "2024-11-30T13:30:35.667Z",
+        "__v": 0
+    },
+    {
+        "_id": "674beb33c1d530325f3dfa6a",
+        "username": "suru",
+        "nickname": "ruchi",
+        "description": "i am happy",
+        "categories": [
+            "js",
+            "java",
+            "yoga"
+        ],
+        "datecreated": "2024-12-01T04:50:02.427Z",
+        "__v": 0
+    },
+    {
+        "_id": "674beda30fc18b96e56ee0f8",
+        "username": "amrita",
+        "nickname": "ami",
+        "description": "i am happy",
+        "categories": [
+            "js",
+            "java",
+            "node",
+            "mongodb",
+            "yoga",
+            "content"
+        ],
+        "datecreated": "2024-12-01T05:01:22.219Z",
+        "__v": 0
+    }
+]
+
+3. How do i find documents with a specific date range in mongoose?
+
+if we have to put some condition like all,gte(>=),lte(<=),we write $ before it, gte-greater than equal to , lte - less than equal to
+
+router.get('/findthree',async function(req,res){
+  let date1 = new Date('2024-11-29'); //'yyyy-mm-dd' 
+  let date2 = new Date('2024-12-01');
+  let data = await userModel.find({datecreated:{$gte:date1, $lte:date2}}); 
+  res.send(data); //-- dev,deva,radha,
+})
+
+router.get('/findthree',async function(req,res){
+  let date1 = new Date('2024-11-29'); //'yyyy-mm-dd' 
+  let data = await userModel.find({datecreated:{$gte:date1}}); 
+  res.send(data); //-- dev,deva,radha,suru,amrita
+})

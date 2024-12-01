@@ -1,0 +1,11 @@
+INTERMEDIATE MONGODB 
+
+1. How can i perform a case-insensitive search in Mongoose?
+
+2. How do i find documents where array field contains all of a set of values?
+
+3. How do i find documents with a specific date range in mongoose?
+
+4. How can I filter documents based on existence of field in mongoose?
+
+5. How can I filter documents based on specific field's length in mongoose?

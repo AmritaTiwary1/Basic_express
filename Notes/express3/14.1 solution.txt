@@ -1,0 +1,124 @@
+All document in the userModel 
+[
+    {
+        "_id": "674b123c7f7fff649cb8f96e",
+        "username": "dev",
+        "nickname": "ved",
+        "description": "i am happy from inside and outside",
+        "categories": [
+            "js",
+            "node",
+            "react",
+            "mongodb",
+            "express"
+        ],
+        "datecreated": "2024-11-30T13:25:00.452Z",
+        "__v": 0
+    },
+    {
+        "_id": "674b1368c81b843b6e9ca054",
+        "username": "deva",
+        "nickname": "aved",
+        "description": "i am happy",
+        "categories": [
+            "life",
+            "hapiness",
+            "yoga"
+        ],
+        "datecreated": "2024-11-30T13:30:02.068Z",
+        "__v": 0
+    },
+    {
+        "_id": "674b137f756b0ae55513a0b3",
+        "username": "radha",
+        "nickname": "radhe",
+        "description": "full of joy and happiness",
+        "categories": [
+            "real joy",
+            "content"
+        ],
+        "datecreated": "2024-11-30T13:30:35.667Z",
+        "__v": 0
+    },
+    {
+        "_id": "674beb33c1d530325f3dfa6a",
+        "username": "suru",
+        "nickname": "ruchi",
+        "description": "i am happy",
+        "categories": [
+            "js",
+            "java",
+            "yoga"
+        ],
+        "datecreated": "2024-12-01T04:50:02.427Z",
+        "__v": 0
+    },
+    {
+        "_id": "674beda30fc18b96e56ee0f8",
+        "username": "amrita",
+        "nickname": "ami",
+        "description": "i am happy",
+        "categories": [
+            "js",
+            "java",
+            "node",
+            "mongodb",
+            "yoga",
+            "content"
+        ],
+        "datecreated": "2024-12-01T05:01:22.219Z",
+        "__v": 0
+    }
+]
+
+1. How can i perform a case-insensitive search in Mongoose?
+
+ ********* 1. How can i perform a case-insensitive search in Mongoose? 
+
+router.get('/find',async function(req,res){
+  let user= await userModel.find({username:"radha"});
+  res.send(user);  //getting correct document(radha)
+ })
+
+what if we type Radha instead of radha
+ router.get('/find',async function(req,res){
+ let user= await userModel.find({username:"Radha"});
+  res.send(user);    //--> [] , output is empty
+})
+
+How to remove case insensitivity with RegExp (if we write Radha and one username is radharani, then that document will also be visible)
+ router.get('/find',async function(req,res){
+   const regex = new RegExp("Radh",'i');
+   let user= await userModel.find({username:regex});  
+   res.send(user)  //op -- radha document
+ })
+ 
+***************************************************************************************************
+2nd way : How to remove case insensitivity
+    RegExp
+ ^xyz => it means starting me aisa jrur hona chahiye
+xyz$ => it means if word have xyz at the end,show it (eg. hoxyz[yes] , xyzha[no]) 
+ ^xyz$ => it means word should exactly contain xyz in capital/small/mix
+
+ router.get('/find',async function(req,res){
+   let regex= new RegExp("^Radh$","i");
+  let user= await userModel.find({username:regex});
+
+  // let user= await userModel.find({username:/^Radh$/i});
+   res.send(user) //no doc
+ })
+
+ router.get('/find',async function(req,res){
+  let user= await userModel.find({username:/^Radh/i});
+  res.send(user) //radha doc
+ })
+
+router.get('/findone',async function(req,res){
+ let regex= new RegExp("^RadhA$","i");
+ let user= await userModel.find({username:regex}); //radha doc
+
+let user= await userModel.find({username:/A$/i});  //i means insensitive , g means global
+  res.send(user) //radha,deva,amrita docs bcoz here i have $ means at the end, i want "a"
+})
+
+// ***************************************************************************************

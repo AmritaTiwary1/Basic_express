@@ -1,0 +1,88 @@
+All document in the userModel
+[
+    {
+        "_id": "674b123c7f7fff649cb8f96e",
+        "username": "dev",
+        "nickname": "ved",
+        "description": "i am happy from inside and outside",
+        "categories": [
+            "js",
+            "node",
+            "react",
+            "mongodb",
+            "express"
+        ],
+        "datecreated": "2024-11-30T13:25:00.452Z",
+        "__v": 0
+    },
+    {
+        "_id": "674b1368c81b843b6e9ca054",
+        "username": "deva",
+        "nickname": "aved",
+        "description": "i am happy",
+        "categories": [
+            "life",
+            "hapiness",
+            "yoga"
+        ],
+        "datecreated": "2024-11-30T13:30:02.068Z",
+        "__v": 0
+    },
+    {
+        "_id": "674b137f756b0ae55513a0b3",
+        "username": "radha",
+        "nickname": "radhe",
+        "description": "full of joy and happiness",
+        "categories": [
+            "real joy",
+            "content"
+        ],
+        "datecreated": "2024-11-30T13:30:35.667Z",
+        "__v": 0
+    },
+    {
+        "_id": "674beb33c1d530325f3dfa6a",
+        "username": "suru",
+        "nickname": "ruchi",
+        "description": "i am happy",
+        "categories": [
+            "js",
+            "java",
+            "yoga"
+        ],
+        "datecreated": "2024-12-01T04:50:02.427Z",
+        "__v": 0
+    },
+    {
+        "_id": "674beda30fc18b96e56ee0f8",
+        "username": "amrita",
+        "nickname": "ami",
+        "description": "i am happy",
+        "categories": [
+            "js",
+            "java",
+            "node",
+            "mongodb",
+            "yoga",
+            "content"
+        ],
+        "datecreated": "2024-12-01T05:01:22.219Z",
+        "__v": 0
+    }
+]
+
+
+5. How can I filter documents based on specific field's length in mongoose?
+
+router.get('/findfive',async function(req,res){
+  let data = await userModel.find({
+    $expr:{   //--- expression
+      $and:[ //--and means both consitions are compulsory
+        {$gte:[{$strLenCP:"$nickname"}, 0]},   //gte - greater than equal & strLenCP-string length compare
+        {$lte:[{$strLenCP:"$nickname"}, 3]}
+     ]}
+  })
+res.send(data);
+})
+
+Above code is quite tough for beginners, but once we understand mongodb and accessing documents ,it will be easier
