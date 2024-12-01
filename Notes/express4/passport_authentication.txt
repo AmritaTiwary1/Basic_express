@@ -1,0 +1,11 @@
+install these packages :
+  npm i passport passport-local passport-local-mongoose mongoose express-session
+
+1. write app.js code first , and write it after app.set(view engine..etc) and before app.use(logger...etc)
+
+2. setup users.js properly
+
+3.in index.js try register first and then other code as well
+cd desktop
+ 
+ SEE EXPRESS4'S ROUTES & VIEWS FOLDER TO UNDERSTAND LOGIN/REGISTER PROCESS(also protected routes) AND HOW TO HANDLE AUTH IN FORMS
