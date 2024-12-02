@@ -16,14 +16,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(expressSession({
+app.use(expressSession({  // here we add express session in code so that we can use passport session
   resave:false,
   secret:'radhe radhe',
   saveUninitialized:false
 }));
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); //we are using session of passport here
 passport.serializeUser(usersRouter.serializeUser());
 passport.deserializeUser(usersRouter.deserializeUser());
 
